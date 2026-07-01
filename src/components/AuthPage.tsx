@@ -126,7 +126,7 @@ const AuthPage = ({ onSuccess, onBack, initialMode = 'login' }: Props) => {
                       placeholder="Иван Петров"
                       value={form.full_name}
                       onChange={(e) => set('full_name', e.target.value)}
-                      className="bg-white/8 border-white/15 text-white placeholder:text-blue-300/30 focus-visible:ring-blue-400/40"
+                      className="bg-[#0a1628] border-white/15 text-white placeholder:text-blue-300/30 focus-visible:ring-blue-400/40"
                     />
                   </div>
                   <div>
@@ -135,7 +135,7 @@ const AuthPage = ({ onSuccess, onBack, initialMode = 'login' }: Props) => {
                       placeholder="ООО Компания"
                       value={form.company}
                       onChange={(e) => set('company', e.target.value)}
-                      className="bg-white/8 border-white/15 text-white placeholder:text-blue-300/30 focus-visible:ring-blue-400/40"
+                      className="bg-[#0a1628] border-white/15 text-white placeholder:text-blue-300/30 focus-visible:ring-blue-400/40"
                     />
                   </div>
                   <div>
@@ -144,7 +144,7 @@ const AuthPage = ({ onSuccess, onBack, initialMode = 'login' }: Props) => {
                       placeholder="+7 (924) 000-00-00"
                       value={form.phone}
                       onChange={(e) => set('phone', e.target.value)}
-                      className="bg-white/8 border-white/15 text-white placeholder:text-blue-300/30 focus-visible:ring-blue-400/40"
+                      className="bg-[#0a1628] border-white/15 text-white placeholder:text-blue-300/30 focus-visible:ring-blue-400/40"
                     />
                   </div>
                 </>
@@ -158,7 +158,7 @@ const AuthPage = ({ onSuccess, onBack, initialMode = 'login' }: Props) => {
                   placeholder="your@company.ru"
                   value={form.email}
                   onChange={(e) => set('email', e.target.value)}
-                  className="bg-white/8 border-white/15 text-white placeholder:text-blue-300/30 focus-visible:ring-blue-400/40"
+                  className="bg-[#0a1628] border-white/15 text-white placeholder:text-blue-300/30 focus-visible:ring-blue-400/40"
                 />
               </div>
 
@@ -170,7 +170,7 @@ const AuthPage = ({ onSuccess, onBack, initialMode = 'login' }: Props) => {
                   placeholder={mode === 'register' ? 'Минимум 6 символов' : '••••••••'}
                   value={form.password}
                   onChange={(e) => set('password', e.target.value)}
-                  className="bg-white/8 border-white/15 text-white placeholder:text-blue-300/30 focus-visible:ring-blue-400/40"
+                  className="bg-[#0a1628] border-white/15 text-white placeholder:text-blue-300/30 focus-visible:ring-blue-400/40"
                 />
               </div>
 

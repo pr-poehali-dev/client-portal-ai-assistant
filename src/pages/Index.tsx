@@ -44,6 +44,24 @@ const CHAT_SEED = [
   { role: 'assistant', text: 'Здравствуйте! Я ИИ-ассистент по сопровождению 1С. Опишите вашу задачу — помогу с настройкой, ошибками или консультацией.' },
 ];
 
+const KPI = [
+  { label: 'Всего обращений', value: '142', trend: '+12%', up: true, icon: 'Inbox' },
+  { label: 'Решено ИИ', value: '68%', trend: '+5%', up: true, icon: 'Bot' },
+  { label: 'Ср. время ответа', value: '1.4 ч', trend: '−18%', up: true, icon: 'Timer' },
+  { label: 'Открыто сейчас', value: '9', trend: '+2', up: false, icon: 'AlertCircle' },
+];
+
+const CHART = [
+  { m: 'Янв', v: 42 }, { m: 'Фев', v: 55 }, { m: 'Мар', v: 48 },
+  { m: 'Апр', v: 71 }, { m: 'Май', v: 63 }, { m: 'Июн', v: 88 },
+];
+
+const CATEGORIES = [
+  { name: 'Ошибка', pct: 46, color: 'bg-destructive' },
+  { name: 'Консультация', pct: 34, color: 'bg-accent' },
+  { name: 'Доработка', pct: 20, color: 'bg-amber-500' },
+];
+
 const Index = () => {
   const [active, setActive] = useState('home');
   const [menuOpen, setMenuOpen] = useState(false);
@@ -265,6 +283,75 @@ const Index = () => {
                   ))}
                 </tbody>
               </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Analytics */}
+      <section className="mx-auto max-w-7xl px-5 py-16">
+        <div className="mb-8">
+          <div className="text-xs uppercase tracking-widest text-accent font-medium mb-2">Аналитика по задачам</div>
+          <h2 className="text-2xl font-semibold tracking-tight">Показатели обращений</h2>
+        </div>
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+          {KPI.map((k) => (
+            <div key={k.label} className="rounded-xl border border-border bg-card p-5">
+              <div className="flex items-center justify-between">
+                <div className="flex h-9 w-9 items-center justify-center rounded bg-primary/5">
+                  <Icon name={k.icon} size={18} className="text-primary" />
+                </div>
+                <span className={`text-xs font-medium ${k.up ? 'text-emerald-600' : 'text-destructive'}`}>{k.trend}</span>
+              </div>
+              <div className="mt-4 text-3xl font-semibold tracking-tight">{k.value}</div>
+              <div className="mt-1 text-sm text-muted-foreground">{k.label}</div>
+            </div>
+          ))}
+        </div>
+
+        <div className="grid lg:grid-cols-3 gap-4">
+          {/* Bar chart */}
+          <div className="lg:col-span-2 rounded-xl border border-border bg-card p-6">
+            <div className="flex items-center justify-between mb-6">
+              <div className="font-medium">Динамика обращений</div>
+              <Badge variant="outline" className="font-normal">6 месяцев</Badge>
+            </div>
+            <div className="flex items-end justify-between gap-3 h-48">
+              {CHART.map((c) => (
+                <div key={c.m} className="flex-1 flex flex-col items-center gap-2">
+                  <div className="w-full flex items-end justify-center" style={{ height: '160px' }}>
+                    <div
+                      className="w-full max-w-[44px] rounded-t bg-gradient-to-t from-primary to-accent transition-all hover:opacity-80"
+                      style={{ height: `${(c.v / 88) * 100}%` }}
+                      title={`${c.v} обращений`}
+                    />
+                  </div>
+                  <span className="text-xs text-muted-foreground">{c.m}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Categories */}
+          <div className="rounded-xl border border-border bg-card p-6">
+            <div className="font-medium mb-6">Распределение по категориям</div>
+            <div className="space-y-5">
+              {CATEGORIES.map((c) => (
+                <div key={c.name}>
+                  <div className="flex justify-between text-sm mb-1.5">
+                    <span>{c.name}</span>
+                    <span className="font-mono text-muted-foreground">{c.pct}%</span>
+                  </div>
+                  <div className="h-2 rounded-full bg-secondary overflow-hidden">
+                    <div className={`h-full rounded-full ${c.color}`} style={{ width: `${c.pct}%` }} />
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="mt-6 border-t border-border pt-4 flex items-center gap-2 text-sm text-muted-foreground">
+              <Icon name="TrendingUp" size={16} className="text-emerald-600" />
+              Доля решённых ИИ выросла на 5%
             </div>
           </div>
         </div>

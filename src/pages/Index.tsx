@@ -95,16 +95,17 @@ const Index = () => {
 
       {/* Welcome banner */}
       {user && (
-        <div className="border-b border-border bg-primary/5">
+        <div className="border-b border-white/10 bg-[#0d1e3d]">
           <div className="mx-auto max-w-7xl px-5 py-3 flex items-center gap-3">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/15 shrink-0">
-              <Icon name="BadgeCheck" size={17} className="text-primary" />
+            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-blue-500/20 shrink-0">
+              <Icon name="BadgeCheck" size={15} className="text-blue-400" />
             </div>
-            <div className="text-sm">
-              Добро пожаловать, <span className="font-semibold">{user.full_name || user.email}</span>
-              {user.company && <span className="text-muted-foreground"> · {user.company}</span>}
+            <div className="text-sm text-blue-100/80">
+              Добро пожаловать,{' '}
+              <span className="font-bold text-white">{user.full_name || user.email}</span>
+              {user.company && <span className="text-blue-300/50"> · {user.company}</span>}
             </div>
-            <div className="ml-auto flex items-center gap-1.5 rounded-md border border-primary/20 bg-background px-2.5 py-1 text-xs font-mono text-primary font-semibold">
+            <div className="ml-auto flex items-center gap-1.5 rounded-md border border-white/15 bg-white/8 px-2.5 py-1 text-xs font-mono text-blue-300 font-semibold">
               <Icon name="Fingerprint" size={13} />
               {user.client_id}
             </div>
@@ -123,32 +124,35 @@ const Index = () => {
       {active === 'docs' && <ApiDocs />}
 
       {/* Footer */}
-      <footer className="border-t border-border bg-card">
-        <div className="mx-auto max-w-7xl px-5 py-10">
-          <div className="flex flex-col md:flex-row justify-between gap-6">
-            <div className="flex items-center gap-2.5">
-              <div className="flex h-8 w-8 items-center justify-center rounded bg-primary">
-                <Icon name="LifeBuoy" size={18} className="text-primary-foreground" />
+      <footer className="border-t border-white/10 bg-[#0a1628] text-white">
+        <div className="mx-auto max-w-7xl px-5 py-8">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            <div className="flex items-center gap-3">
+              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-500/20">
+                <Icon name="LifeBuoy" size={18} className="text-blue-400" />
               </div>
               <div>
-                <div className="font-semibold">Портал 1С · Инновации ДВ</div>
-                <div className="text-xs text-muted-foreground">office@intdv.ru · +7 (924) 263-09-21</div>
+                <div className="font-bold text-sm text-white">Портал 1С · Инновации ДВ</div>
+                <div className="text-xs text-blue-300/50">office@intdv.ru · +7 (924) 263-09-21</div>
               </div>
             </div>
-            <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted-foreground">
+            <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-blue-300/50">
               {NAV.map((n) => (
-                <button key={n.id} onClick={() => setActive(n.id)} className="hover:text-foreground transition-colors">{n.label}</button>
+                <button key={n.id} onClick={() => setActive(n.id)} className="hover:text-white transition-colors">{n.label}</button>
               ))}
             </div>
           </div>
-          <div className="mt-6 border-t border-border pt-5 flex items-center justify-between gap-4">
-            <div className="text-xs text-muted-foreground">
+          <div className="mt-6 border-t border-white/10 pt-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+            <div className="text-xs text-blue-300/40">
               © 2016–2026 ООО «Инновации ДВ» · ИНН 2543091244 · Все данные передаются по HTTPS.
             </div>
-            <Button variant="ghost" size="sm" className="text-xs text-muted-foreground" onClick={goToLanding}>
-              <Icon name="ArrowLeft" size={14} className="mr-1" />
+            <button
+              className="flex items-center gap-1.5 text-xs text-blue-300/40 hover:text-blue-300 transition-colors"
+              onClick={goToLanding}
+            >
+              <Icon name="ArrowLeft" size={13} />
               На сайт компании
-            </Button>
+            </button>
           </div>
         </div>
       </footer>

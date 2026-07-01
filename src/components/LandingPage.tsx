@@ -32,46 +32,81 @@ const PARTNERS = [
   {
     name: 'Созвездие',
     desc: 'Консалтинг и автоматизация на базе 1С. Владивосток',
-    icon: 'Star',
+    url: 'https://sozvezdie1c.ru',
+    logo: 'https://logo.clearbit.com/sozvezdie1c.ru',
+    fallbackIcon: 'Star',
     color: '#1a56db',
     bg: '#eff6ff',
   },
   {
     name: 'Клеверенс',
     desc: 'ПО для складской автоматизации и маркировки на ТСД',
-    icon: 'PackageSearch',
+    url: 'https://www.cleverence.ru',
+    logo: 'https://logo.clearbit.com/cleverence.ru',
+    fallbackIcon: 'PackageSearch',
     color: '#0e9f6e',
     bg: '#ecfdf5',
   },
   {
     name: 'Моби-С',
     desc: 'Мобильная торговля и автоматизация торговых представителей',
-    icon: 'Smartphone',
+    url: 'https://mobi-c.ru',
+    logo: 'https://logo.clearbit.com/mobi-c.ru',
+    fallbackIcon: 'Smartphone',
     color: '#7c3aed',
     bg: '#f5f3ff',
   },
   {
     name: 'ScanSoft',
     desc: 'Мобильные решения для склада, магазина и маркировки',
-    icon: 'ScanLine',
+    url: 'https://scan-soft.ru',
+    logo: 'https://logo.clearbit.com/scan-soft.ru',
+    fallbackIcon: 'ScanLine',
     color: '#d97706',
     bg: '#fffbeb',
   },
   {
     name: 'Битрикс24',
     desc: 'CRM-система, корпоративный портал и управление задачами',
-    icon: 'LayoutDashboard',
-    color: '#e3174e',
-    bg: '#fff1f2',
+    url: 'https://www.bitrix24.ru',
+    logo: 'https://logo.clearbit.com/bitrix24.ru',
+    fallbackIcon: 'LayoutDashboard',
+    color: '#2fc6f6',
+    bg: '#f0fbff',
   },
   {
     name: '1С',
     desc: 'Платформа для автоматизации учёта, ERP и отраслевых решений',
-    icon: 'BookOpen',
+    url: 'https://1c.ru',
+    logo: 'https://logo.clearbit.com/1c.ru',
+    fallbackIcon: 'BookOpen',
     color: '#b45309',
     bg: '#fef3c7',
   },
 ];
+
+interface PartnerLogoProps {
+  logo: string;
+  name: string;
+  fallbackIcon: string;
+  color: string;
+  bg: string;
+}
+
+const PartnerLogo = ({ logo, name, fallbackIcon, color }: PartnerLogoProps) => {
+  const [failed, setFailed] = useState(false);
+  if (failed) {
+    return <Icon name={fallbackIcon} size={26} color={color} />;
+  }
+  return (
+    <img
+      src={logo}
+      alt={name}
+      className="h-9 w-9 object-contain"
+      onError={() => setFailed(true)}
+    />
+  );
+};
 
 interface Props {
   onLogin: () => void;
@@ -212,21 +247,27 @@ const LandingPage = ({ onLogin }: Props) => {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {PARTNERS.map((p) => (
-              <div
+              <a
                 key={p.name}
-                className="flex items-start gap-4 rounded-xl border border-border bg-card p-5 hover:border-primary/30 hover:shadow-md transition-all group"
+                href={p.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-start gap-4 rounded-xl border border-border bg-card p-5 hover:border-primary/40 hover:shadow-lg hover:-translate-y-0.5 transition-all group"
               >
                 <div
-                  className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl"
+                  className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl overflow-hidden"
                   style={{ backgroundColor: p.bg }}
                 >
-                  <Icon name={p.icon} size={24} color={p.color} />
+                  <PartnerLogo logo={p.logo} name={p.name} fallbackIcon={p.fallbackIcon} color={p.color} bg={p.bg} />
                 </div>
-                <div>
-                  <div className="font-black text-base" style={{ color: p.color }}>{p.name}</div>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-1.5">
+                    <span className="font-black text-base">{p.name}</span>
+                    <Icon name="ExternalLink" size={13} className="text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </div>
                   <div className="text-sm text-muted-foreground mt-0.5 leading-snug">{p.desc}</div>
                 </div>
-              </div>
+              </a>
             ))}
           </div>
         </div>

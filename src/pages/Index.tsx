@@ -1,17 +1,33 @@
 import { useState } from 'react';
 import LandingPage from '@/components/LandingPage';
+import AuthPage from '@/components/AuthPage';
 import PortalHeader, { NAV } from '@/components/PortalHeader';
 import HomeContent from '@/components/HomeContent';
 import ApiDocs from '@/components/ApiDocs';
 import Icon from '@/components/ui/icon';
 import { Button } from '@/components/ui/button';
 
+interface User {
+  id: number;
+  email: string;
+  full_name: string;
+  company: string;
+  phone: string;
+  client_id: string;
+  is_admin?: boolean;
+  created_at: string;
+}
+
 const CHAT_SEED = [
   { role: 'assistant', text: 'Здравствуйте! Я ИИ-ассистент по сопровождению 1С. Опишите вашу задачу — помогу с настройкой, ошибками или консультацией.' },
 ];
 
+type Screen = 'landing' | 'auth' | 'portal';
+
 const Index = () => {
-  const [isPortal, setIsPortal] = useState(false);
+  const [screen, setScreen] = useState<Screen>('landing');
+  const [authMode, setAuthMode] = useState<'login' | 'register'>('login');
+  const [user, setUser] = useState<User | null>(null);
   const [active, setActive] = useState('home');
   const [menuOpen, setMenuOpen] = useState(false);
   const [chat, setChat] = useState(CHAT_SEED);
@@ -27,19 +43,42 @@ const Index = () => {
     setInput('');
   };
 
-  const enterPortal = () => {
-    setIsPortal(true);
+  const openAuth = (mode: 'login' | 'register' = 'login') => {
+    setAuthMode(mode);
+    setScreen('auth');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleAuthSuccess = (u: User) => {
+    setUser(u);
+    setScreen('portal');
     setActive('home');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const exitPortal = () => {
-    setIsPortal(false);
+  const handleLogout = () => {
+    setUser(null);
+    setScreen('landing');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  if (!isPortal) {
-    return <LandingPage onLogin={enterPortal} />;
+  const goToLanding = () => {
+    setScreen('landing');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  if (screen === 'landing') {
+    return <LandingPage onLogin={() => openAuth('login')} onRegister={() => openAuth('register')} />;
+  }
+
+  if (screen === 'auth') {
+    return (
+      <AuthPage
+        initialMode={authMode}
+        onSuccess={handleAuthSuccess}
+        onBack={goToLanding}
+      />
+    );
   }
 
   return (
@@ -49,8 +88,29 @@ const Index = () => {
         setActive={setActive}
         menuOpen={menuOpen}
         setMenuOpen={setMenuOpen}
-        onExit={exitPortal}
+        onExit={goToLanding}
+        user={user}
+        onLogout={handleLogout}
       />
+
+      {/* Welcome banner */}
+      {user && (
+        <div className="border-b border-border bg-primary/5">
+          <div className="mx-auto max-w-7xl px-5 py-3 flex items-center gap-3">
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/15 shrink-0">
+              <Icon name="BadgeCheck" size={17} className="text-primary" />
+            </div>
+            <div className="text-sm">
+              Добро пожаловать, <span className="font-semibold">{user.full_name || user.email}</span>
+              {user.company && <span className="text-muted-foreground"> · {user.company}</span>}
+            </div>
+            <div className="ml-auto flex items-center gap-1.5 rounded-md border border-primary/20 bg-background px-2.5 py-1 text-xs font-mono text-primary font-semibold">
+              <Icon name="Fingerprint" size={13} />
+              {user.client_id}
+            </div>
+          </div>
+        </div>
+      )}
 
       <HomeContent
         setActive={setActive}
@@ -85,7 +145,7 @@ const Index = () => {
             <div className="text-xs text-muted-foreground">
               © 2016–2026 ООО «Инновации ДВ» · ИНН 2543091244 · Все данные передаются по HTTPS.
             </div>
-            <Button variant="ghost" size="sm" className="text-xs text-muted-foreground" onClick={exitPortal}>
+            <Button variant="ghost" size="sm" className="text-xs text-muted-foreground" onClick={goToLanding}>
               <Icon name="ArrowLeft" size={14} className="mr-1" />
               На сайт компании
             </Button>

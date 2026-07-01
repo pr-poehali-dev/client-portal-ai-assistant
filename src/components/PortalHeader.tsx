@@ -13,15 +13,25 @@ const NAV = [
   { id: 'contacts', label: 'Контакты' },
 ];
 
+interface User {
+  id: number;
+  email: string;
+  full_name: string;
+  company: string;
+  client_id: string;
+}
+
 interface Props {
   active: string;
   setActive: (id: string) => void;
   menuOpen: boolean;
   setMenuOpen: (v: boolean | ((prev: boolean) => boolean)) => void;
   onExit?: () => void;
+  user?: User | null;
+  onLogout?: () => void;
 }
 
-const PortalHeader = ({ active, setActive, menuOpen, setMenuOpen, onExit }: Props) => {
+const PortalHeader = ({ active, setActive, menuOpen, setMenuOpen, onExit, user, onLogout }: Props) => {
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-card/90 backdrop-blur-md">
       <div className="mx-auto max-w-7xl px-5">
@@ -49,16 +59,29 @@ const PortalHeader = ({ active, setActive, menuOpen, setMenuOpen, onExit }: Prop
           </nav>
 
           <div className="flex items-center gap-2">
-            {onExit && (
+            {user && (
+              <div className="hidden sm:flex items-center gap-2 rounded-lg border border-border bg-secondary/60 px-3 py-1.5">
+                <div className="flex h-7 w-7 items-center justify-center rounded-full bg-primary/15">
+                  <Icon name="UserCircle" size={16} className="text-primary" />
+                </div>
+                <div className="leading-tight">
+                  <div className="text-xs font-semibold">{user.full_name || user.email}</div>
+                  <div className="text-[10px] text-muted-foreground font-mono">{user.client_id}</div>
+                </div>
+              </div>
+            )}
+            {onLogout && (
+              <Button variant="ghost" size="sm" className="hidden sm:flex" onClick={onLogout}>
+                <Icon name="LogOut" size={15} className="mr-1" />
+                Выйти
+              </Button>
+            )}
+            {onExit && !user && (
               <Button variant="ghost" size="sm" className="hidden sm:flex" onClick={onExit}>
                 <Icon name="ArrowLeft" size={15} className="mr-1" />
                 На сайт
               </Button>
             )}
-            <Button size="sm" className="hidden sm:flex">
-              <Icon name="UserCircle" size={15} className="mr-1" />
-              Кабинет
-            </Button>
             <button className="lg:hidden p-2" onClick={() => setMenuOpen((v) => !v)}>
               <Icon name={menuOpen ? 'X' : 'Menu'} size={22} />
             </button>

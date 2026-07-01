@@ -1,0 +1,62 @@
+{
+  "tests": [
+    {
+      "name": "Register new user",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "action": "register",
+        "email": "test_idv_auto@example.com",
+        "password": "test1234",
+        "full_name": "Иван Тестов",
+        "company": "ООО Тест",
+        "phone": "+7 (924) 000-00-00"
+      },
+      "expectedStatus": 200,
+      "expectedBody": { "success": true },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Duplicate register returns 409",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "action": "register",
+        "email": "test_idv_auto@example.com",
+        "password": "test1234",
+        "full_name": "Иван Тестов",
+        "company": "ООО Тест",
+        "phone": "+7 (924) 000-00-00"
+      },
+      "expectedStatus": 409,
+      "expectedBody": { "error": "Пользователь с таким email уже зарегистрирован" },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Login success",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "action": "login",
+        "email": "test_idv_auto@example.com",
+        "password": "test1234"
+      },
+      "expectedStatus": 200,
+      "expectedBody": { "success": true },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Login wrong password",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "action": "login",
+        "email": "test_idv_auto@example.com",
+        "password": "wrongpass"
+      },
+      "expectedStatus": 401,
+      "expectedBody": { "error": "Неверный email или пароль" },
+      "bodyMatcher": "partial"
+    }
+  ]
+}

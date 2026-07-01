@@ -4,13 +4,14 @@ import LandingContacts from './landing/LandingContacts';
 
 interface Props {
   onLogin: () => void;
+  onRegister: () => void;
 }
 
-const LandingPage = ({ onLogin }: Props) => {
+const LandingPage = ({ onLogin, onRegister }: Props) => {
   return (
     <div className="min-h-screen bg-background text-foreground font-sans">
       <LandingHeader onLogin={onLogin} />
-      <LandingMain onLogin={onLogin} />
+      <LandingMain onLogin={onLogin} onRegister={onRegister} />
       <LandingContacts />
     </div>
   );

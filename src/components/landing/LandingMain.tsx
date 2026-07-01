@@ -28,9 +28,10 @@ const PartnerLogo = ({ logo, name, fallbackIcon, color }: PartnerLogoProps) => {
 
 interface Props {
   onLogin: () => void;
+  onRegister: () => void;
 }
 
-const LandingMain = ({ onLogin }: Props) => {
+const LandingMain = ({ onLogin, onRegister }: Props) => {
   return (
     <>
       {/* Hero */}
@@ -219,7 +220,7 @@ const LandingMain = ({ onLogin }: Props) => {
                   <Icon name="LogIn" size={18} className="mr-2" />
                   Войти в кабинет
                 </Button>
-                <Button size="lg" variant="outline">
+                <Button size="lg" variant="outline" onClick={onRegister}>
                   <Icon name="UserPlus" size={18} className="mr-2" />
                   Зарегистрироваться
                 </Button>

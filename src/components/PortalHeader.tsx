@@ -1,6 +1,8 @@
 import Icon from '@/components/ui/icon';
 import { Button } from '@/components/ui/button';
 
+const LOGO_URL = 'https://cdn.poehali.dev/projects/dc952390-4837-45eb-b79b-467f972bc182/files/favicon-1780639102129.jpg';
+
 const NAV = [
   { id: 'home', label: 'Главная' },
   { id: 'assistant', label: 'ИИ-Ассистент' },
@@ -25,9 +27,7 @@ const PortalHeader = ({ active, setActive, menuOpen, setMenuOpen, onExit }: Prop
       <div className="mx-auto max-w-7xl px-5">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center gap-2.5">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary">
-              <Icon name="Zap" size={18} className="text-primary-foreground" />
-            </div>
+            <img src={LOGO_URL} alt="Инновации ДВ" className="h-9 w-9 rounded-lg object-cover" />
             <div className="leading-tight">
               <div className="font-bold tracking-tight">Инновации ДВ</div>
               <div className="text-[10px] uppercase tracking-widest text-muted-foreground">Клиентский портал</div>

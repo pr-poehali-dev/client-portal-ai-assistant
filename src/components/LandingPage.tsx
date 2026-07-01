@@ -163,50 +163,84 @@ const LandingPage = ({ onLogin }: Props) => {
       </header>
 
       {/* Hero */}
-      <section className="relative overflow-hidden border-b border-border bg-gradient-to-br from-background via-background to-orange-50">
-        <div className="absolute inset-0 opacity-[0.025]"
+      <section className="relative overflow-hidden border-b border-border bg-[#0d1e3d]">
+        {/* Subtle grid overlay */}
+        <div className="absolute inset-0 opacity-[0.06]"
           style={{
-            backgroundImage: 'linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)',
-            backgroundSize: '40px 40px',
+            backgroundImage: 'linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)',
+            backgroundSize: '48px 48px',
           }}
         />
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/8 blur-[100px] rounded-full translate-x-1/3 -translate-y-1/3" />
+        {/* Blue glow top-left */}
+        <div className="absolute -top-32 -left-32 w-[500px] h-[500px] bg-blue-600/20 blur-[120px] rounded-full" />
 
-        <div className="relative mx-auto max-w-7xl px-5 py-24 md:py-36">
-          <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/8 px-4 py-1.5 text-xs text-primary font-semibold mb-8 animate-fade-in">
-              <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
-              Владивосток · Работаем с 2016 года
+        <div className="relative mx-auto max-w-7xl px-5 py-20 md:py-28">
+          <div className="grid lg:grid-cols-2 gap-10 items-center">
+            {/* Left — text */}
+            <div>
+              <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/8 px-4 py-1.5 text-xs text-blue-300 font-semibold mb-8 animate-fade-in">
+                <span className="h-1.5 w-1.5 rounded-full bg-blue-400 animate-pulse" />
+                Владивосток · Работаем с 2016 года
+              </div>
+              <h1 className="text-5xl md:text-6xl font-black tracking-tight leading-[1.05] text-white animate-fade-in" style={{ animationDelay: '60ms' }}>
+                IT-решения для<br />
+                <span className="text-blue-400">дальневосточного</span><br />
+                бизнеса
+              </h1>
+              <p className="mt-6 text-lg text-blue-100/70 max-w-lg animate-fade-in" style={{ animationDelay: '120ms' }}>
+                Внедряем 1С, автоматизируем процессы, поставляем оборудование и сопровождаем IT-инфраструктуру предприятий Дальнего Востока.
+              </p>
+              <div className="mt-10 flex flex-wrap gap-3 animate-fade-in" style={{ animationDelay: '180ms' }}>
+                <Button size="lg" className="text-base px-7 bg-white text-[#0d1e3d] hover:bg-blue-50 font-bold" onClick={onLogin}>
+                  Войти в портал поддержки
+                  <Icon name="ArrowRight" size={18} className="ml-2" />
+                </Button>
+                <Button size="lg" variant="outline" className="text-base px-7 border-white/25 text-white hover:bg-white/10" asChild>
+                  <a href="#feedback">Оставить заявку</a>
+                </Button>
+              </div>
+              <div className="mt-10 flex flex-wrap gap-6 text-sm text-blue-200/60 animate-fade-in" style={{ animationDelay: '240ms' }}>
+                <span className="flex items-center gap-2"><Icon name="ShieldCheck" size={15} className="text-blue-400" /> Защита HTTPS</span>
+                <span className="flex items-center gap-2"><Icon name="Award" size={15} className="text-blue-400" /> Партнёр 1С</span>
+                <span className="flex items-center gap-2"><Icon name="Clock" size={15} className="text-blue-400" /> Поддержка 24/7</span>
+              </div>
             </div>
-            <h1 className="text-5xl md:text-6xl font-black tracking-tight leading-[1.05] text-foreground animate-fade-in" style={{ animationDelay: '60ms' }}>
-              IT-решения для<br />
-              <span className="text-primary">дальневосточного</span><br />
-              бизнеса
-            </h1>
-            <p className="mt-6 text-lg text-muted-foreground max-w-xl animate-fade-in" style={{ animationDelay: '120ms' }}>
-              Внедряем 1С, автоматизируем процессы, поставляем оборудование и сопровождаем IT-инфраструктуру предприятий Дальнего Востока.
-            </p>
-            <div className="mt-10 flex flex-wrap gap-3 animate-fade-in" style={{ animationDelay: '180ms' }}>
-              <Button size="lg" className="text-base px-7" onClick={onLogin}>
-                Войти в портал поддержки
-                <Icon name="ArrowRight" size={18} className="ml-2" />
-              </Button>
-              <Button size="lg" variant="outline" className="text-base px-7" asChild>
-                <a href="#feedback">Оставить заявку</a>
-              </Button>
+
+            {/* Right — image */}
+            <div className="relative hidden lg:block animate-fade-in" style={{ animationDelay: '200ms' }}>
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-black/50 border border-white/10">
+                <img
+                  src="https://cdn.poehali.dev/projects/cb67a010-9e51-4b4b-aea6-982c034eee99/files/04157181-4d22-4b14-9ca8-036a855bba59.jpg"
+                  alt="IT-инфраструктура"
+                  className="w-full h-[400px] object-cover"
+                />
+                {/* Overlay badge */}
+                <div className="absolute bottom-4 left-4 right-4 rounded-xl bg-[#0d1e3d]/80 backdrop-blur-sm border border-white/10 p-4 flex items-center gap-3">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-blue-500/20">
+                    <Icon name="LifeBuoy" size={20} className="text-blue-400" />
+                  </div>
+                  <div>
+                    <div className="text-white text-sm font-bold">Клиентский портал 1С</div>
+                    <div className="text-blue-300/70 text-xs">ИИ-ассистент · Обращения · Статусы заявок</div>
+                  </div>
+                  <Button size="sm" className="ml-auto bg-blue-500 hover:bg-blue-400 text-white shrink-0" onClick={onLogin}>
+                    Войти
+                  </Button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Stats */}
-      <section className="border-b border-border bg-secondary/60">
+      <section className="border-b border-border bg-[#0d1e3d]">
         <div className="mx-auto max-w-7xl px-5 py-10">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 divide-x divide-white/10">
             {STATS.map((s) => (
-              <div key={s.label} className="text-center">
-                <div className="text-4xl font-black text-primary">{s.value}</div>
-                <div className="mt-1 text-sm text-muted-foreground">{s.label}</div>
+              <div key={s.label} className="text-center px-4">
+                <div className="text-4xl font-black text-white">{s.value}</div>
+                <div className="mt-1 text-sm text-blue-300/70">{s.label}</div>
               </div>
             ))}
           </div>
@@ -454,22 +488,22 @@ const LandingPage = ({ onLogin }: Props) => {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-border bg-foreground text-background">
+      <footer className="border-t border-white/10 bg-[#0a1628] text-white">
         <div className="mx-auto max-w-7xl px-5 py-8">
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
             <div className="flex items-center gap-3">
-              <img src={LOGO_URL} alt="Инновации ДВ" className="h-8 w-8 rounded-lg object-cover opacity-90" />
+              <img src={LOGO_URL} alt="Инновации ДВ" className="h-8 w-8 rounded-lg object-cover" />
               <div>
-                <div className="font-bold text-sm">ООО «Инновации ДВ»</div>
-                <div className="text-xs opacity-50">ИНН 2543091244 · ОГРН 1162536055880</div>
+                <div className="font-bold text-sm text-white">ООО «Инновации ДВ»</div>
+                <div className="text-xs text-blue-300/50">ИНН 2543091244 · ОГРН 1162536055880</div>
               </div>
             </div>
-            <div className="flex flex-wrap gap-x-6 gap-y-1 text-xs opacity-50">
+            <div className="flex flex-wrap gap-x-6 gap-y-1 text-xs text-blue-300/50">
               <span>690002, Владивосток, пр-кт Красного Знамени, 59, оф. 505</span>
               <span>office@intdv.ru</span>
             </div>
           </div>
-          <div className="mt-6 border-t border-background/10 pt-4 text-xs opacity-40">
+          <div className="mt-6 border-t border-white/10 pt-4 text-xs text-blue-300/40">
             © 2016–2026 ООО «Инновации ДВ». Все права защищены. Данные передаются по HTTPS.
           </div>
         </div>

@@ -4,45 +4,45 @@
 
 @layer base {
   :root {
-    /* Инновации ДВ — светлая тема, оранжевый акцент */
-    --background: 0 0% 99%;
-    --foreground: 220 20% 14%;
+    /* Инновации ДВ — деловой стиль, тёмно-синий + белый */
+    --background: 0 0% 100%;
+    --foreground: 218 45% 12%;
 
     --card: 0 0% 100%;
-    --card-foreground: 220 20% 14%;
+    --card-foreground: 218 45% 12%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 220 20% 14%;
+    --popover-foreground: 218 45% 12%;
 
-    --primary: 27 95% 52%;
+    --primary: 218 72% 22%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 220 14% 96%;
-    --secondary-foreground: 220 20% 20%;
+    --secondary: 218 30% 96%;
+    --secondary-foreground: 218 45% 18%;
 
-    --muted: 220 12% 95%;
-    --muted-foreground: 220 10% 46%;
+    --muted: 218 20% 95%;
+    --muted-foreground: 218 15% 46%;
 
-    --accent: 27 95% 52%;
+    --accent: 210 100% 45%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 13% 90%;
-    --input: 220 13% 90%;
-    --ring: 27 95% 52%;
+    --border: 218 20% 88%;
+    --input: 218 20% 88%;
+    --ring: 218 72% 22%;
 
-    --radius: 0.5rem;
+    --radius: 0.375rem;
 
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 220 20% 20%;
-    --sidebar-primary: 27 95% 52%;
+    --sidebar-background: 218 45% 10%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 210 100% 55%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 220 14% 96%;
-    --sidebar-accent-foreground: 220 20% 20%;
-    --sidebar-border: 220 13% 90%;
-    --sidebar-ring: 27 95% 52%;
+    --sidebar-accent: 218 40% 18%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 218 35% 20%;
+    --sidebar-ring: 210 100% 55%;
   }
 }
 

@@ -1,0 +1,24 @@
+{
+  "tests": [
+    {
+      "name": "GET pending events",
+      "method": "GET",
+      "path": "/?action=pending",
+      "expectedStatus": 200,
+      "expectedBody": {},
+      "bodyMatcher": "ignore"
+    },
+    {
+      "name": "POST incoming event from 1C",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "event": "ticket.status_changed",
+        "payload": { "num": "ОБ-99999", "status": "В работе", "onec_doc_id": "00001" }
+      },
+      "expectedStatus": 200,
+      "expectedBody": {},
+      "bodyMatcher": "ignore"
+    }
+  ]
+}

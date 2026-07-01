@@ -1,0 +1,26 @@
+{
+  "tests": [
+    {
+      "name": "GET tickets list",
+      "method": "GET",
+      "path": "/",
+      "expectedStatus": 200,
+      "expectedBody": {},
+      "bodyMatcher": "ignore"
+    },
+    {
+      "name": "POST create ticket",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "subject": "Test ticket",
+        "description": "Test description for API check",
+        "category": "Ошибка",
+        "priority": "Средний"
+      },
+      "expectedStatus": 201,
+      "expectedBody": {},
+      "bodyMatcher": "ignore"
+    }
+  ]
+}

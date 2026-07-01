@@ -1,0 +1,22 @@
+{
+  "tests": [
+    {
+      "name": "POST chat message — generic",
+      "method": "POST",
+      "path": "/",
+      "body": { "message": "Как провести документ в 1С?" },
+      "expectedStatus": 200,
+      "expectedBody": {},
+      "bodyMatcher": "ignore"
+    },
+    {
+      "name": "POST chat message — keyword ошибка",
+      "method": "POST",
+      "path": "/",
+      "body": { "message": "У меня ошибка при закрытии месяца" },
+      "expectedStatus": 200,
+      "expectedBody": {},
+      "bodyMatcher": "ignore"
+    }
+  ]
+}

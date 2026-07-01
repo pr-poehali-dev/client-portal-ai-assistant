@@ -195,7 +195,7 @@ const LandingPage = ({ onLogin }: Props) => {
                   Войти в портал поддержки
                   <Icon name="ArrowRight" size={18} className="ml-2" />
                 </Button>
-                <Button size="lg" variant="outline" className="text-base px-7 border-white/25 text-white hover:bg-white/10" asChild>
+                <Button size="lg" variant="outline" className="text-base px-7 border-white/25 text-[#0d1e3d] bg-white hover:bg-blue-50 font-bold" asChild>
                   <a href="#feedback">Оставить заявку</a>
                 </Button>
               </div>

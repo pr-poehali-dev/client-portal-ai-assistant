@@ -29,12 +29,48 @@ const WHY = [
 ];
 
 const PARTNERS = [
-  { name: '1С', desc: 'Франчайзи 1С', color: '#f6c32c' },
-  { name: 'Microsoft', desc: 'Авторизованный партнёр', color: '#0078d4' },
-  { name: 'Kaspersky', desc: 'Партнёр по безопасности', color: '#006d5b' },
-  { name: 'HP', desc: 'Дилер оборудования', color: '#0096d6' },
-  { name: 'Lenovo', desc: 'Авторизованный дилер', color: '#e2231a' },
-  { name: 'ESET', desc: 'Партнёр по антивирусам', desc2: '', color: '#5a9e3a' },
+  {
+    name: 'Созвездие',
+    desc: 'Консалтинг и автоматизация на базе 1С. Владивосток',
+    icon: 'Star',
+    color: '#1a56db',
+    bg: '#eff6ff',
+  },
+  {
+    name: 'Клеверенс',
+    desc: 'ПО для складской автоматизации и маркировки на ТСД',
+    icon: 'PackageSearch',
+    color: '#0e9f6e',
+    bg: '#ecfdf5',
+  },
+  {
+    name: 'Моби-С',
+    desc: 'Мобильная торговля и автоматизация торговых представителей',
+    icon: 'Smartphone',
+    color: '#7c3aed',
+    bg: '#f5f3ff',
+  },
+  {
+    name: 'ScanSoft',
+    desc: 'Мобильные решения для склада, магазина и маркировки',
+    icon: 'ScanLine',
+    color: '#d97706',
+    bg: '#fffbeb',
+  },
+  {
+    name: 'Битрикс24',
+    desc: 'CRM-система, корпоративный портал и управление задачами',
+    icon: 'LayoutDashboard',
+    color: '#e3174e',
+    bg: '#fff1f2',
+  },
+  {
+    name: '1С',
+    desc: 'Платформа для автоматизации учёта, ERP и отраслевых решений',
+    icon: 'BookOpen',
+    color: '#b45309',
+    bg: '#fef3c7',
+  },
 ];
 
 interface Props {
@@ -169,22 +205,27 @@ const LandingPage = ({ onLogin }: Props) => {
         <div className="mx-auto max-w-7xl px-5 py-16">
           <div className="mb-10 text-center">
             <div className="text-xs uppercase tracking-widest text-primary font-semibold mb-3">Наши партнёры</div>
-            <h2 className="text-3xl font-black tracking-tight">Работаем с лидерами рынка</h2>
+            <h2 className="text-3xl font-black tracking-tight">Технологические партнёры</h2>
             <p className="mt-3 text-muted-foreground max-w-lg mx-auto">
-              Авторизованный партнёр ведущих IT-вендоров — гарантия оригинальных продуктов и сертифицированной поддержки.
+              Работаем только с проверенными решениями — используем продукты и платформы, которым доверяют предприятия по всей России.
             </p>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {PARTNERS.map((p) => (
-              <div key={p.name} className="flex flex-col items-center justify-center rounded-xl border border-border bg-card p-5 text-center hover:border-primary/30 hover:shadow-md transition-all group">
+              <div
+                key={p.name}
+                className="flex items-start gap-4 rounded-xl border border-border bg-card p-5 hover:border-primary/30 hover:shadow-md transition-all group"
+              >
                 <div
-                  className="flex h-12 w-12 items-center justify-center rounded-lg mb-3 text-white font-black text-lg"
-                  style={{ backgroundColor: p.color }}
+                  className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl"
+                  style={{ backgroundColor: p.bg }}
                 >
-                  {p.name.slice(0, 2)}
+                  <Icon name={p.icon} size={24} color={p.color} />
                 </div>
-                <div className="font-bold text-sm">{p.name}</div>
-                <div className="text-[11px] text-muted-foreground mt-0.5 leading-tight">{p.desc}</div>
+                <div>
+                  <div className="font-black text-base" style={{ color: p.color }}>{p.name}</div>
+                  <div className="text-sm text-muted-foreground mt-0.5 leading-snug">{p.desc}</div>
+                </div>
               </div>
             ))}
           </div>

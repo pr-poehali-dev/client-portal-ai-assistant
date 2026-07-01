@@ -16,20 +16,21 @@ interface Props {
   setActive: (id: string) => void;
   menuOpen: boolean;
   setMenuOpen: (v: boolean | ((prev: boolean) => boolean)) => void;
+  onExit?: () => void;
 }
 
-const PortalHeader = ({ active, setActive, menuOpen, setMenuOpen }: Props) => {
+const PortalHeader = ({ active, setActive, menuOpen, setMenuOpen, onExit }: Props) => {
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-card/90 backdrop-blur-md">
       <div className="mx-auto max-w-7xl px-5">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center gap-2.5">
-            <div className="flex h-9 w-9 items-center justify-center rounded bg-primary">
-              <Icon name="LifeBuoy" size={20} className="text-primary-foreground" />
+            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary">
+              <Icon name="Zap" size={18} className="text-primary-foreground" />
             </div>
             <div className="leading-tight">
-              <div className="font-semibold tracking-tight">Портал 1С</div>
-              <div className="text-[11px] uppercase tracking-widest text-muted-foreground">Сопровождение</div>
+              <div className="font-bold tracking-tight">Инновации ДВ</div>
+              <div className="text-[10px] uppercase tracking-widest text-muted-foreground">Клиентский портал</div>
             </div>
           </div>
 
@@ -48,8 +49,16 @@ const PortalHeader = ({ active, setActive, menuOpen, setMenuOpen }: Props) => {
           </nav>
 
           <div className="flex items-center gap-2">
-            <Button variant="ghost" size="sm" className="hidden sm:flex">Войти</Button>
-            <Button size="sm" className="hidden sm:flex">Регистрация</Button>
+            {onExit && (
+              <Button variant="ghost" size="sm" className="hidden sm:flex" onClick={onExit}>
+                <Icon name="ArrowLeft" size={15} className="mr-1" />
+                На сайт
+              </Button>
+            )}
+            <Button size="sm" className="hidden sm:flex">
+              <Icon name="UserCircle" size={15} className="mr-1" />
+              Кабинет
+            </Button>
             <button className="lg:hidden p-2" onClick={() => setMenuOpen((v) => !v)}>
               <Icon name={menuOpen ? 'X' : 'Menu'} size={22} />
             </button>

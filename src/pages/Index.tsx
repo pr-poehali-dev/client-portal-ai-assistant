@@ -1,14 +1,17 @@
 import { useState } from 'react';
+import LandingPage from '@/components/LandingPage';
 import PortalHeader, { NAV } from '@/components/PortalHeader';
 import HomeContent from '@/components/HomeContent';
 import ApiDocs from '@/components/ApiDocs';
 import Icon from '@/components/ui/icon';
+import { Button } from '@/components/ui/button';
 
 const CHAT_SEED = [
   { role: 'assistant', text: 'Здравствуйте! Я ИИ-ассистент по сопровождению 1С. Опишите вашу задачу — помогу с настройкой, ошибками или консультацией.' },
 ];
 
 const Index = () => {
+  const [isPortal, setIsPortal] = useState(false);
   const [active, setActive] = useState('home');
   const [menuOpen, setMenuOpen] = useState(false);
   const [chat, setChat] = useState(CHAT_SEED);
@@ -24,6 +27,21 @@ const Index = () => {
     setInput('');
   };
 
+  const enterPortal = () => {
+    setIsPortal(true);
+    setActive('home');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const exitPortal = () => {
+    setIsPortal(false);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  if (!isPortal) {
+    return <LandingPage onLogin={enterPortal} />;
+  }
+
   return (
     <div className="min-h-screen bg-background text-foreground font-sans">
       <PortalHeader
@@ -31,6 +49,7 @@ const Index = () => {
         setActive={setActive}
         menuOpen={menuOpen}
         setMenuOpen={setMenuOpen}
+        onExit={exitPortal}
       />
 
       <HomeContent
@@ -51,7 +70,10 @@ const Index = () => {
               <div className="flex h-8 w-8 items-center justify-center rounded bg-primary">
                 <Icon name="LifeBuoy" size={18} className="text-primary-foreground" />
               </div>
-              <span className="font-semibold">Портал 1С · Сопровождение</span>
+              <div>
+                <div className="font-semibold">Портал 1С · Инновации ДВ</div>
+                <div className="text-xs text-muted-foreground">office@intdv.ru · +7 (924) 263-09-21</div>
+              </div>
             </div>
             <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted-foreground">
               {NAV.map((n) => (
@@ -59,8 +81,14 @@ const Index = () => {
               ))}
             </div>
           </div>
-          <div className="mt-8 border-t border-border pt-6 text-xs text-muted-foreground">
-            © 2026 Клиентский портал 1С. Все данные передаются по защищённому протоколу HTTPS.
+          <div className="mt-6 border-t border-border pt-5 flex items-center justify-between gap-4">
+            <div className="text-xs text-muted-foreground">
+              © 2016–2026 ООО «Инновации ДВ» · ИНН 2543091244 · Все данные передаются по HTTPS.
+            </div>
+            <Button variant="ghost" size="sm" className="text-xs text-muted-foreground" onClick={exitPortal}>
+              <Icon name="ArrowLeft" size={14} className="mr-1" />
+              На сайт компании
+            </Button>
           </div>
         </div>
       </footer>

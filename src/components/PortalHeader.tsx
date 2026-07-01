@@ -19,6 +19,7 @@ interface User {
   full_name: string;
   company: string;
   client_id: string;
+  is_admin?: boolean;
 }
 
 interface Props {
@@ -32,6 +33,11 @@ interface Props {
 }
 
 const PortalHeader = ({ active, setActive, menuOpen, setMenuOpen, onExit, user, onLogout }: Props) => {
+  const visibleNav = NAV.filter(n => {
+    if (n.id === 'admin') return user?.is_admin === true;
+    return true;
+  });
+
   return (
     <header className="sticky top-0 z-40 border-b border-white/10 bg-[#0d1e3d]/95 backdrop-blur-md shadow-sm">
       <div className="mx-auto max-w-7xl px-5">
@@ -42,13 +48,15 @@ const PortalHeader = ({ active, setActive, menuOpen, setMenuOpen, onExit, user, 
             <img src={LOGO_URL} alt="Инновации ДВ" className="h-9 w-9 rounded-lg object-cover" />
             <div className="leading-tight">
               <div className="font-bold tracking-tight text-white">Инновации ДВ</div>
-              <div className="text-[10px] uppercase tracking-widest text-blue-300/60">Клиентский портал</div>
+              <div className="text-[10px] uppercase tracking-widest text-blue-300/60">
+                {user?.is_admin ? 'Администратор' : 'Клиентский портал'}
+              </div>
             </div>
           </div>
 
           {/* Desktop nav */}
           <nav className="hidden lg:flex items-center gap-1">
-            {NAV.map((n) => (
+            {visibleNav.map((n) => (
               <button
                 key={n.id}
                 onClick={() => setActive(n.id)}
@@ -58,7 +66,12 @@ const PortalHeader = ({ active, setActive, menuOpen, setMenuOpen, onExit, user, 
                     : 'text-blue-200/70 hover:text-white hover:bg-white/8'
                 }`}
               >
-                {n.label}
+                {n.id === 'admin' ? (
+                  <span className="flex items-center gap-1.5">
+                    <span className="h-1.5 w-1.5 rounded-full bg-amber-400" />
+                    {n.label}
+                  </span>
+                ) : n.label}
               </button>
             ))}
           </nav>
@@ -110,7 +123,7 @@ const PortalHeader = ({ active, setActive, menuOpen, setMenuOpen, onExit, user, 
         {/* Mobile menu */}
         {menuOpen && (
           <nav className="lg:hidden pb-4 grid grid-cols-2 gap-1 animate-fade-in border-t border-white/10 pt-3 mt-1">
-            {NAV.map((n) => (
+            {visibleNav.map((n) => (
               <button
                 key={n.id}
                 onClick={() => { setActive(n.id); setMenuOpen(false); }}

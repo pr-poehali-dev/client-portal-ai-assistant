@@ -1,0 +1,28 @@
+{
+  "tests": [
+    {
+      "name": "Get stats",
+      "method": "GET",
+      "path": "/?action=stats",
+      "expectedStatus": 200,
+      "expectedBody": { "total": 4 },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Get clients returns list",
+      "method": "GET",
+      "path": "/?action=clients",
+      "expectedStatus": 200,
+      "expectedBody": { "clients": [{ "id": 2 }] },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Get all tickets returns list",
+      "method": "GET",
+      "path": "/?action=tickets",
+      "expectedStatus": 200,
+      "expectedBody": { "tickets": [{ "id": 4 }] },
+      "bodyMatcher": "partial"
+    }
+  ]
+}
